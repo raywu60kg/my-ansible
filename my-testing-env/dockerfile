@@ -1,0 +1,6 @@
+FROM ubuntu:20.04
+RUN apt-get update && apt-get -y install sudo
+RUN useradd -rm -d /home/raywu -s /bin/bash -g root -G sudo -u 1001 -p 60kg raywu
+RUN echo "raywu:60kg" | chpasswd
+USER raywu
+WORKDIR /home/raywu
