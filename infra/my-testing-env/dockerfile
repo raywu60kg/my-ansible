@@ -6,8 +6,8 @@ RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 RUN useradd -rm -d /home/raywu -s /bin/bash -g root -G sudo -u 1001 -p 60kg raywu
 RUN echo "raywu:60kg" | chpasswd
 RUN mkdir /home/raywu/.ssh
-RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+# RUN apt-get clean && \
+#     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN /usr/sbin/sshd
 # USER raywu
 WORKDIR /home/raywu

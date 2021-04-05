@@ -1,0 +1,20 @@
+---
+# - hosts: my-testing-env
+#   tasks:
+#     # task 1
+#     - name: test connection
+#       ping:
+#       register: message
+
+#     # task 2
+#     - name: print debug message
+#       debug:
+#         msg: "{{ message }}"
+- name: Pre-install 
+  hosts: my-testing-env
+  any_errors_fatal: true
+  become: yes
+  roles:
+    - common
+  tags:
+    - utils

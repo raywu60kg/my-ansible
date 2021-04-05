@@ -1,0 +1,6 @@
+---
+# tasks file for common
+- name: "apt-get update"
+  shell: "apt-get update"
+- name: "install utils"
+  shell: "apt-get -y install curl"
