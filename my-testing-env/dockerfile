@@ -1,6 +1,18 @@
 FROM ubuntu:20.04
-RUN apt-get update && apt-get -y install sudo
+RUN apt-get update && apt-get -y install sudo openssh-server
+RUN mkdir /var/run/sshd
+RUN sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 RUN useradd -rm -d /home/raywu -s /bin/bash -g root -G sudo -u 1001 -p 60kg raywu
 RUN echo "raywu:60kg" | chpasswd
-USER raywu
+RUN mkdir /home/raywu/.ssh
+RUN apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN /usr/sbin/sshd
+# USER raywu
 WORKDIR /home/raywu
+EXPOSE 22
+CMD    ["/usr/sbin/sshd", "-D"]
+
+
+

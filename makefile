@@ -7,7 +7,7 @@ my-ansible-up:
 	docker run -it \
         --rm \
 	    --name ansible \
-		--network=br0 \
+		--network br0 \
 		--ip 192.168.1.1 \
 	    raywu60kg/ansible:${TAG} \
 		/bin/bash
@@ -17,7 +17,6 @@ my-testing-env-up:
 	docker run -it \
         --rm \
 	    --name testing-env \
-		--network=br0 \
+		--network br0 \
 		--ip 192.168.1.2 \
-	    raywu60kg/testing-env:${TAG} \
-		/bin/bash
+	    raywu60kg/testing-env:${TAG} 
