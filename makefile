@@ -1,6 +1,6 @@
 TAG = 0.1.0
 docker-network-up:
-	docker network create --driver=bridge --subnet=192.168.0.0/16 br0
+	docker network create --driver=bridge --subnet=173.17.0.0/16 br0
 my-ansible-build:
 	docker build -f ./infra/ansible/dockerfile -t raywu60kg/ansible:${TAG} .
 my-ansible-up:
@@ -8,7 +8,7 @@ my-ansible-up:
         --rm \
 	    --name ansible \
 		--network br0 \
-		--ip 192.168.1.1 \
+		--ip 173.17.1.1 \
 		-v $(shell pwd):/usr/src/app/ \
 	    raywu60kg/ansible:${TAG} \
 		/bin/bash
@@ -19,7 +19,7 @@ my-testing-env-up:
         --rm \
 	    --name testing-env \
 		--network br0 \
-		--ip 192.168.1.2 \
+		--ip 173.17.1.2 \
 	    raywu60kg/testing-env:${TAG} 
 ansible-ping:
 	ansible my-testing-env -m ping -i inventories/hosts.yml --extra-vars "@env.yml" 
